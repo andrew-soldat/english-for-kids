@@ -246,6 +246,17 @@ $color-play: #00d4ff;
 	font-size: 35px;
 	color:#5e5d5d;
 }
+.wrapper-stars {
+	margin: 0px 0px 20px 0px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	img {
+		width: 50px;
+		height: 50px;
+	}
+}
 .cards {
 	 display: flex;
 	 justify-content: center;
@@ -344,7 +355,7 @@ $color-play: #00d4ff;
 	&__rotate {
 		width: 30px;
 		height: 30px;
-		background: url('assets/img/icon-rotate.svg') center / 30px no-repeat;
+		background: url('assets/img/rotate.png') center / 30px no-repeat;
 		position: absolute;
 		bottom: 19px;
 		right: 16px;
@@ -352,15 +363,15 @@ $color-play: #00d4ff;
 		z-index: 2;
 
 		&:hover {
-			transform: rotate(180deg);
+			transform: rotate(-180deg);
 		}
 	}
 }
 .play {
-	display: none;
 	text-align: center;
 
-	&__button {
+	&__start,
+	&__repeat {
 		display: inline-block;
 		margin-top: 40px;
 		padding: 10px 20px;
@@ -369,9 +380,10 @@ $color-play: #00d4ff;
 		font-size: 25px;
 		border-radius: 5px;
 		transition: all 0.3s ease 0s;
+		box-shadow: 0 2px 5px $color-play;
 		
 		&:hover {
-			transform: scale(1.1);
+			box-shadow: 0 7px 14px $color-play;
 		}
 	}
 }

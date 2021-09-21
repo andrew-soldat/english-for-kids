@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
-import PlayCard from './PlayCard';
 
-
-
-const CardCategory = ({modePlay, child}) => {
+const CardCategory = ({child}) => {
 	const [isActive, setActive] = useState(false);
 
-	if (modePlay) return (
-		<PlayCard child={child} />
-	)
 	return (
-		
 		<div className={`card-item ${isActive ? '_active' : ''}`}>
 			<div className="card-item__front">
 				<img className="card-item__image" src={child.imgSrc} alt={child.word} onClick={ () => new Audio(child.audioSrc).play() } />

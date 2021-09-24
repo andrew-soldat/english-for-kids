@@ -38,7 +38,7 @@ const Header = ( {toggleMode, store} ) => {
 					<input className="switch__input" type="checkbox" onClick={toggleMode} />
 					<span className="switch__slider"></span>
 				</label>
-				<span className="toggle__text">Play</span>
+				<span className="toggle__text">Game</span>
 			</div>
 			<div className="header__menu">
 				<div className={`header__burger ${isActive ? '_active' : ''}`} onClick={ handleToggle }>

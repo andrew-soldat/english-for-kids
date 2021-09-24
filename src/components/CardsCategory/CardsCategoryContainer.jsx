@@ -1,23 +1,87 @@
 import React, { useState } from 'react';
 import CardCategory from './CardCategory'
+import correctMP3 from './../../assets/audio/correct.mp3'
+import wrongMP3 from './../../assets/audio/wrong.mp3'
+import failureMP3 from './../../assets/audio/failure.mp3'
+import successMP3 from './../../assets/audio/success.mp3'
+import successImg from './../../assets/img/success.jpg'
+import failureImg from './../../assets/img/failure.jpg'
 
 
-const CardsCategoryContainer = ({modePlay, nameCategory, children}) => {
-	const [isStartPlay, setIsStartPlay] = useState(false);
+const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
+	const [isStartGame, setIsStartGame] = useState(false);
+	const [resultGame, setResultGame] = useState(false);
+	const [namberCounter, setErrorCounter] = useState(0);
 
-	const startPlay = () => {
-		setIsStartPlay(true);
+	let countError = 0;
 
+	const startGame = () => {
+		setIsStartGame(true);
+		
 		const arraySounds = [];
 
 		Object.values(children).map((child) => arraySounds.push(child.audioSrc));
 	
 		const newArraySounds = shuffleArraySounds(arraySounds);
 
-		newArraySounds.forEach((item) => {
-			const el = new Audio(item);
-			el.play()
+		playBackSoundCard();
+
+		function playBackSoundCard() {
+			if (newArraySounds.length  !== 0) {
+				setTimeout(() => new Audio(newArraySounds[newArraySounds.length -1]).play(), 1000);
+			} else {
+				finishGame();
+			}
+		}
+		
+		function deleteOneCardFromArray() {
+			newArraySounds.pop();
+		}
+
+		const arrayCards = document.querySelector('.cards');
+
+		const wrapperStars = document.querySelector('.wrapper-stars');
+		const btnRepeatSound = document.querySelector('.play__start');
+
+		// console.log(btnRepeatSound);
+		
+		btnRepeatSound.addEventListener('click', () => new Audio(newArraySounds[newArraySounds.length -1]).play());
+
+		arrayCards.addEventListener('click', (e) => {
+			if (e.target !== arrayCards) {
+				if (`assets/audio/${e.target.getAttribute("data-word")}.mp3` === newArraySounds[newArraySounds.length -1]) {
+					wrapperStars.innerHTML += `<img src="assets/img/star-win.svg" alt="correct" />`;
+					new Audio(correctMP3).play();
+					deleteOneCardFromArray()
+					playBackSoundCard();
+				} else {
+					countError++
+					console.log(countError);
+					
+					wrapperStars.innerHTML += `<img src="assets/img/star.svg" alt="wrong" />`;
+					new Audio(wrongMP3).play();
+				}
+			}
 		})
+	}
+	
+	const finishGame = () => {
+		console.log(countError);
+		
+		if (countError === 0) {
+			new Audio(successMP3).play();
+		} else {
+			new Audio(failureMP3).play();
+		}
+		setErrorCounter(countError)
+		setResultGame(true);
+
+		setTimeout(() => {
+			// setErrorCounter(0)
+			setResultGame(false);
+			setIsStartGame(false);
+		}, 5000)
+
 	}
 
 	const shuffleArraySounds = (array) => {
@@ -26,39 +90,44 @@ const CardsCategoryContainer = ({modePlay, nameCategory, children}) => {
 		  [array[i], array[j]] = [array[j], array[i]];
 		}
 		return array;
-	 }
-
+	}
+	
+	if (resultGame) {
+		return <main className="page _result">
+						<div className="result">
+							<img src={namberCounter === 0 ? successImg : failureImg} alt="success" />
+							<div className="result__text">You have made {namberCounter} mistakes!</div>
+						</div>
+					</main>
+	}
    return (
 		<main className="page">
 			<div className="category-title">
 				<h1 className="category-title__text">{nameCategory}</h1>
-				{modePlay &&
-					<div className="wrapper-stars">
-						{/* <img src="assets/img/star.svg" alt="" />
-						<img src="assets/img/star-win.svg" alt="" /> */}
-					</div>
-				}
 			</div>
+			{modeGame &&
+				<div className="wrapper-stars"></div>
+			}
 			<div className="cards">
 				{Object.values(children).map((child) => {
-					if (modePlay) return (
+					if (modeGame) return (
 						<div key={child.word} className="card-item">
 							<div className="card-item__front">
-								<img className="card-item__image" src={child.imgSrc} alt={child.word} />
+								<img className="card-item__image" src={child.imgSrc} data-word={child.word} alt={child.word}/>
 							</div>
 						</div>
 					)
 					return (
-						<CardCategory modePlay={modePlay} key={child.word} child={child} />
+						<CardCategory key={child.word} child={child} />
 					)
 				}
 				)}
 			</div>
-			{modePlay &&
+			{modeGame &&
 				<div className="play">
-					{isStartPlay ?
+					{isStartGame ?
 						<button className="play__repeat">Repeat</button> :
-						<button className="play__start" onClick={startPlay}>Start</button>
+						<button className="play__start" onClick={startGame}>Start</button>
 					}
 				</div>
 			}

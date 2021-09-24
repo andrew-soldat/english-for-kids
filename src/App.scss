@@ -24,10 +24,18 @@ $color-play: #00d4ff;
 		.toggle__text:first-child {
 			color: #888;
 			font-size: 20px;
+
+			@media (max-width: 565px) {
+				font-size: 18px;
+			}
 		}
 		.toggle__text:last-child {
 			color: $color-play;
 			font-size: 30px;
+
+			@media (max-width: 565px) {
+				font-size: 24px;
+			}
 		}
 
 		.header__burger span {
@@ -74,6 +82,10 @@ $color-play: #00d4ff;
 }
 .page {
 	flex: 1 1 auto;
+
+	&._result {
+		display: flex;
+	}
 }
 .header {
 	padding: 30px 0px 60px 0px;
@@ -183,6 +195,14 @@ $color-play: #00d4ff;
 			font-size: 30px;
 			color: $color-train;
 		}
+
+		@media (max-width: 565px) {
+			font-size: 18px;
+
+			&:first-child {
+				font-size: 24px;
+			}
+		}
 	}
 }
 .switch {
@@ -192,6 +212,10 @@ $color-play: #00d4ff;
 	width: 60px;
 	height: 30px;
 	cursor: pointer;
+
+	@media (max-width: 565px) {
+		margin: 0 10px;
+	}
 
 	&__input {
 		opacity: 0;
@@ -384,6 +408,29 @@ $color-play: #00d4ff;
 		
 		&:hover {
 			box-shadow: 0 7px 14px $color-play;
+		}
+	}
+}
+.result {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	&__text {
+		margin: 20px 0px 0px 0px;
+		font-size: 45px;
+		color: #111111;
+
+		@media (max-width: 565px) {
+			font-size: 25px;
 		}
 	}
 }

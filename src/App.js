@@ -9,20 +9,20 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App(props) {
 	// const modePlay = useMode();
-	let [modePlay, setModePlay] = useState(false);
-	const toggleMode = () => setModePlay(!modePlay);
+	let [modeGame, setModeGame] = useState(false);
+	const toggleMode = () => setModeGame(!modeGame);
 	// console.log(modePlay, 'app');
 	
 
 	return (
 		// <ModePlayProvider>
 			<BrowserRouter>
-				<div className={`wrapper ${modePlay ? '_mode-play' : ''}`}>
+				<div className={`wrapper ${modeGame ? '_mode-play' : ''}`}>
 					<Header store={props.store} toggleMode={toggleMode} />
 					<Switch>
 						<Route exact path="/" render={() => <MainPage store={props.store}/>}/>
 						{Object.values(props.store).map((card) => 
-							<Route key={card.name} path={`/${card.name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} render={() => <CardsCategoryContainer modePlay={modePlay} nameCategory={card.name} children={card.children} />}/>) }
+							<Route key={card.name} path={`/${card.name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} render={() => <CardsCategoryContainer modeGame={modeGame} nameCategory={card.name} children={card.children} />}/>) }
 					</Switch>
 					<Footer />
 				</div>

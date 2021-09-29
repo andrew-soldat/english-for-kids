@@ -6,6 +6,7 @@ import failureMP3 from './../../assets/audio/failure.mp3'
 import successMP3 from './../../assets/audio/success.mp3'
 import successImg from './../../assets/img/success.jpg'
 import failureImg from './../../assets/img/failure.jpg'
+// import cn from 'classnames'
 
 
 const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
@@ -105,7 +106,7 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 			<div className="cards">
 				{Object.values(children).map((child) => {
 					if (modeGame) return (
-						<div key={child.word} className="card-item">
+						<div key={child.word} className={'card-item ' + (isStartGame ? '' : '_game')}>
 							<div className="card-item__front">
 								<img className="card-item__image" src={child.imgSrc} data-word={child.word} alt={child.word}/>
 							</div>

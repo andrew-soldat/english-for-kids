@@ -363,6 +363,20 @@ $color-play: #00d4ff;
 	position: relative;
 	perspective: 500px;
 
+	&._game {
+		.card-item__front {
+			box-shadow: none;
+			
+			&:hover {
+				box-shadow: none;
+			}
+		}
+		.card-item__image {
+			filter: grayscale(50%);
+			cursor: unset;
+		}
+	}
+
 	&._active {
 		cursor: default;
 

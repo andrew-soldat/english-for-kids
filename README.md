@@ -2,4 +2,4 @@
 
 Application for learning English words with kids.
 
-[Link to demo](https://facebook.github.io/create-react-app/docs/running-tests).
+[Link to demo](https://andrew-soldat.github.io/english-for-kids).

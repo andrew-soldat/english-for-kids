@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import MainPage from './components/MainPage/MainPage';
 import CardsCategoryContainer from './components/CardsCategory/CardsCategoryContainer';
 import Footer from './components/Footer';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 // import { ModePlayProvider, useMode } from './ModePlayContext';
 
 function App(props) {
@@ -16,7 +16,7 @@ function App(props) {
 
 	return (
 		// <ModePlayProvider>
-			<BrowserRouter>
+			<HashRouter>
 				<div className={`wrapper ${modeGame ? '_mode-play' : ''}`}>
 					<Header store={props.store} toggleMode={toggleMode} />
 					<Switch>
@@ -26,7 +26,7 @@ function App(props) {
 					</Switch>
 					<Footer />
 				</div>
-			</BrowserRouter>
+			</HashRouter>
 		// </ModePlayProvider>
 	);
 }

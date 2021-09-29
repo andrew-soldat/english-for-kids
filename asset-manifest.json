@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/english-for-kids/static/css/main.0b5512cc.chunk.css",
+    "main.js": "/english-for-kids/static/js/main.6dbf2132.chunk.js",
+    "main.js.map": "/english-for-kids/static/js/main.6dbf2132.chunk.js.map",
+    "runtime-main.js": "/english-for-kids/static/js/runtime-main.d670f79b.js",
+    "runtime-main.js.map": "/english-for-kids/static/js/runtime-main.d670f79b.js.map",
+    "static/js/2.2fc1470d.chunk.js": "/english-for-kids/static/js/2.2fc1470d.chunk.js",
+    "static/js/2.2fc1470d.chunk.js.map": "/english-for-kids/static/js/2.2fc1470d.chunk.js.map",
+    "static/js/3.35456ec3.chunk.js": "/english-for-kids/static/js/3.35456ec3.chunk.js",
+    "static/js/3.35456ec3.chunk.js.map": "/english-for-kids/static/js/3.35456ec3.chunk.js.map",
+    "index.html": "/english-for-kids/index.html",
+    "static/css/main.0b5512cc.chunk.css.map": "/english-for-kids/static/css/main.0b5512cc.chunk.css.map",
+    "static/js/2.2fc1470d.chunk.js.LICENSE.txt": "/english-for-kids/static/js/2.2fc1470d.chunk.js.LICENSE.txt",
+    "static/media/correct.23d0e138.mp3": "/english-for-kids/static/media/correct.23d0e138.mp3",
+    "static/media/failure.296640c6.mp3": "/english-for-kids/static/media/failure.296640c6.mp3",
+    "static/media/failure.f7b0f130.jpg": "/english-for-kids/static/media/failure.f7b0f130.jpg",
+    "static/media/success.5f4128d4.mp3": "/english-for-kids/static/media/success.5f4128d4.mp3",
+    "static/media/success.eaec39d7.jpg": "/english-for-kids/static/media/success.eaec39d7.jpg",
+    "static/media/wrong.88bbaea7.mp3": "/english-for-kids/static/media/wrong.88bbaea7.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d670f79b.js",
+    "static/js/2.2fc1470d.chunk.js",
+    "static/css/main.0b5512cc.chunk.css",
+    "static/js/main.6dbf2132.chunk.js"
+  ]
+}

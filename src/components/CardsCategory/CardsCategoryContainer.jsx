@@ -10,10 +10,10 @@ import failureImg from './../../assets/img/failure.jpg'
 
 const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 	const [isStartGame, setIsStartGame] = useState(false);
-	const [resultGame, setResultGame] = useState(false);
-	const [namberCounter, setErrorCounter] = useState(0);
+	const [isResultGame, setIsResultGame] = useState(false);
+	const [isNumberMistakes, setIsNumberMistakes] = useState(0);
 
-	let countError = 0;
+	let numberMistakes = 0;
 
 	const startGame = () => {
 		setIsStartGame(true);
@@ -21,8 +21,11 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 		const arraySounds = [];
 
 		Object.values(children).map((child) => arraySounds.push(child.audioSrc));
-	
+
 		const newArraySounds = shuffleArraySounds(arraySounds);
+		const arrayCards = document.querySelector('.cards');
+		const wrapperStars = document.querySelector('.wrapper-stars');
+		const btnRepeatSound = document.querySelector('.play__start');
 
 		playBackSoundCard();
 
@@ -30,34 +33,26 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 			if (newArraySounds.length  !== 0) {
 				setTimeout(() => new Audio(newArraySounds[newArraySounds.length -1]).play(), 1000);
 			} else {
-				finishGame();
+				setTimeout(() =>finishGame(), 2000)
 			}
 		}
 		
 		function deleteOneCardFromArray() {
 			newArraySounds.pop();
 		}
-
-		const arrayCards = document.querySelector('.cards');
-
-		const wrapperStars = document.querySelector('.wrapper-stars');
-		const btnRepeatSound = document.querySelector('.play__start');
-
-		// console.log(btnRepeatSound);
 		
 		btnRepeatSound.addEventListener('click', () => new Audio(newArraySounds[newArraySounds.length -1]).play());
 
 		arrayCards.addEventListener('click', (e) => {
-			if (e.target !== arrayCards) {
+			if (e.target.classList.contains('card-item__image') && !e.target.parentNode.classList.contains('hide')) {
 				if (`assets/audio/${e.target.getAttribute("data-word")}.mp3` === newArraySounds[newArraySounds.length -1]) {
+					e.target.parentNode.classList.add('hide')
 					wrapperStars.innerHTML += `<img src="assets/img/star-win.svg" alt="correct" />`;
 					new Audio(correctMP3).play();
-					deleteOneCardFromArray()
+					deleteOneCardFromArray();
 					playBackSoundCard();
 				} else {
-					countError++
-					console.log(countError);
-					
+					numberMistakes++
 					wrapperStars.innerHTML += `<img src="assets/img/star.svg" alt="wrong" />`;
 					new Audio(wrongMP3).play();
 				}
@@ -66,21 +61,18 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 	}
 	
 	const finishGame = () => {
-		console.log(countError);
-		
-		if (countError === 0) {
+		if (numberMistakes === 0) {
 			new Audio(successMP3).play();
 		} else {
 			new Audio(failureMP3).play();
 		}
-		setErrorCounter(countError)
-		setResultGame(true);
+		setIsNumberMistakes(numberMistakes)
+		setIsResultGame(true);
 
 		setTimeout(() => {
-			// setErrorCounter(0)
-			setResultGame(false);
+			setIsResultGame(false);
 			setIsStartGame(false);
-		}, 5000)
+		}, 4000)
 
 	}
 
@@ -92,11 +84,13 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 		return array;
 	}
 	
-	if (resultGame) {
+	if (isResultGame) {
 		return <main className="page _result">
 						<div className="result">
-							<img src={namberCounter === 0 ? successImg : failureImg} alt="success" />
-							<div className="result__text">You have made {namberCounter} mistakes!</div>
+							<img src={isNumberMistakes ? failureImg : successImg} alt={isNumberMistakes ? failureImg : successImg} />
+							<div className="result__text">
+								{isNumberMistakes ? <span>{isNumberMistakes} mistake{isNumberMistakes > 1 ? 's' : ''}.</span> : 'Congratulations!'}
+							</div>
 						</div>
 					</main>
 	}

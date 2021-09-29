@@ -25,7 +25,7 @@ $color-play: #00d4ff;
 			color: #888;
 			font-size: 20px;
 
-			@media (max-width: 565px) {
+			@media (max-width: 768px) {
 				font-size: 18px;
 			}
 		}
@@ -33,7 +33,7 @@ $color-play: #00d4ff;
 			color: $color-play;
 			font-size: 30px;
 
-			@media (max-width: 565px) {
+			@media (max-width: 768px) {
 				font-size: 24px;
 			}
 		}
@@ -65,13 +65,23 @@ $color-play: #00d4ff;
 				border-bottom-left-radius: 5px;
 			}
 			&__front {
-				box-shadow: 0 2px 5px $color-play;
+				box-shadow: 0 1px 4px $color-play;
+
+				&.hide {
+					box-shadow: none;
+
+					&:hover {
+						box-shadow: none;
+					}
+				}
+
+				&:hover {
+					box-shadow: 0 12px 14px $color-play;
+				}
 			}
 
-			&:hover {
-				.card-item__front {
-					box-shadow: 0 14px 28px $color-play;
-				}
+			@media (max-width: 768px) {
+				height: 125px;
 			}
 		}
 
@@ -196,7 +206,7 @@ $color-play: #00d4ff;
 			color: $color-train;
 		}
 
-		@media (max-width: 565px) {
+		@media (max-width: 768px) {
 			font-size: 18px;
 
 			&:first-child {
@@ -213,7 +223,7 @@ $color-play: #00d4ff;
 	height: 30px;
 	cursor: pointer;
 
-	@media (max-width: 565px) {
+	@media (max-width: 768px) {
 		margin: 0 10px;
 	}
 
@@ -269,6 +279,11 @@ $color-play: #00d4ff;
 	text-align: center;
 	font-size: 35px;
 	color:#5e5d5d;
+
+	@media (max-width: 768px) {
+		padding-bottom: 20px;
+		font-size: 30px;
+	}
 }
 .wrapper-stars {
 	margin: 0px 0px 20px 0px;
@@ -279,7 +294,13 @@ $color-play: #00d4ff;
 	img {
 		width: 50px;
 		height: 50px;
+
+		@media (max-width: 768px) {
+			width: 40px;
+			height: 40px;
+		}
 	}
+
 }
 .cards {
 	 display: flex;
@@ -315,6 +336,24 @@ $color-play: #00d4ff;
 		color: #000;
 		text-align: center;
 	}
+
+	@media (max-width: 768px) {
+		width: 145px;
+		margin: 0 5px 10px;
+
+		&__image {
+			width: 135px;
+			height: 120px;
+			border-radius: 20px;
+			margin: 5px auto 0;
+			object-fit: cover;
+		}
+	
+		&__text {
+			margin: 17px 0px;
+			font-size: 16px;
+		}
+	}
 }
 .card-item {
 	width: 250px;
@@ -322,14 +361,7 @@ $color-play: #00d4ff;
 	margin: 0 25px 25px;
 	background-color: #fff;
 	position: relative;
-	perspective: 1000px;
-
-	&:hover {
-		.card-item__front,
-		.card-item__back {
-			box-shadow: 0 14px 28px $color-train;
-		}
-	}
+	perspective: 500px;
 
 	&._active {
 		cursor: default;
@@ -340,6 +372,7 @@ $color-play: #00d4ff;
 
 		.card-item__back {
 			transform: rotateY(360deg);
+			z-index: 2;
 		}
 	}
 
@@ -351,9 +384,32 @@ $color-play: #00d4ff;
 		border-radius: 5px;
 		top: 0;
 		left: 0;
-		transition: all 1s ease 0s;
+		transition: transform 1s ease 0s, box-shadow 0.3s ease 0s;
+		overflow: hidden;
 		backface-visibility: hidden;
-		box-shadow: 0 2px 5px $color-train;
+		box-shadow: 0 1px 4px $color-train;
+
+		&:hover {
+			box-shadow: 0 11px 14px $color-train;
+		}
+			
+		&.hide {
+			box-shadow: none;
+			
+			&:hover {
+				box-shadow: none;
+			}
+			
+			.card-item__image {
+				filter: blur(3px);
+				transform: scale(0.8);
+
+				&:hover {
+					cursor: unset;
+				}
+			}
+
+		}
 	}
 
 	&__back {
@@ -379,15 +435,38 @@ $color-play: #00d4ff;
 	&__rotate {
 		width: 30px;
 		height: 30px;
-		background: url('assets/img/rotate.png') center / 30px no-repeat;
+		background: url('assets/img/rotate.png') center no-repeat;
+		background-size: cover;
 		position: absolute;
 		bottom: 19px;
 		right: 16px;
 		transition: all 0.7s ease 0s;
-		z-index: 2;
+		z-index: 1;
 
 		&:hover {
 			transform: rotate(-180deg);
+		}
+	}
+
+	@media (max-width: 768px) {
+		width: 145px;
+		height: 175px;
+		margin: 0 5px 10px;
+
+		&__image {
+			height: 125px;
+		}
+
+		&__text {
+			padding: 17px 0;
+			font-size: 16px;
+		}
+
+		&__rotate {
+			width: 20px;
+			height: 20px;
+			bottom: 13px;
+			right: 10px;
 		}
 	}
 }
@@ -409,6 +488,11 @@ $color-play: #00d4ff;
 		&:hover {
 			box-shadow: 0 7px 14px $color-play;
 		}
+
+		@media (max-width: 768px) {
+			margin-top: 25px;
+			font-size: 20px;
+		}
 	}
 }
 .result {
@@ -427,10 +511,14 @@ $color-play: #00d4ff;
 	&__text {
 		margin: 20px 0px 0px 0px;
 		font-size: 45px;
-		color: #111111;
+		color: #00d4ff;
 
-		@media (max-width: 565px) {
+		@media (max-width: 768px) {
 			font-size: 25px;
+		}
+
+		span {
+			color: #de3802;
 		}
 	}
 }

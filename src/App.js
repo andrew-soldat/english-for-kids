@@ -1,33 +1,37 @@
-import './App.scss';
-import React, { useState } from 'react';
-import Header from './components/Header/Header';
-import MainPage from './components/MainPage/MainPage';
-import CardsCategoryContainer from './components/CardsCategory/CardsCategoryContainer';
-import Footer from './components/Footer';
-import { HashRouter, Switch, Route } from 'react-router-dom';
-// import { ModePlayProvider, useMode } from './ModePlayContext';
+import './App.scss'
+import React from 'react'
+import Header from './components/Header/Header'
+import MainPage from './components/MainPage/MainPage'
+import CategoryCardsContainer from './components/CategoryCards/CategoryCardsContainer'
+import Footer from './components/Footer'
+import { HashRouter, Switch, Route } from 'react-router-dom'
+import { GameModeProvider, useMode } from './GameModeContext'
+import store from './store'
 
-function App(props) {
-	// const modePlay = useMode();
-	let [modeGame, setModeGame] = useState(false);
-	const toggleMode = () => setModeGame(!modeGame);
-	// console.log(modePlay, 'app');
-	
+function AppContainer(props) {
+	const gameMode = useMode();
 
 	return (
-		// <ModePlayProvider>
-			<HashRouter>
-				<div className={`wrapper ${modeGame ? '_mode-play' : ''}`}>
-					<Header store={props.store} toggleMode={toggleMode} />
-					<Switch>
-						<Route exact path="/" render={() => <MainPage store={props.store}/>}/>
-						{Object.values(props.store).map((card) => 
-							<Route key={card.name} path={`/${card.name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} render={() => <CardsCategoryContainer modeGame={modeGame} nameCategory={card.name} children={card.children} />}/>) }
-					</Switch>
-					<Footer />
-				</div>
-			</HashRouter>
-		// </ModePlayProvider>
+		<HashRouter>
+			<div className={`wrapper ${gameMode.isGameMode ? '_mode-play' : ''}`}>
+				<Header />
+				<Switch>
+					<Route exact path="/" render={() => <MainPage />}/>
+					{Object.values(store).map((card) => 
+						<Route key={card.name} path={`/${card.name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} render={() => <CategoryCardsContainer nameCategory={card.name} children={card.children} />}/>) }
+				</Switch>
+				<Footer />
+			</div>
+		</HashRouter>
+	);
+}
+
+function App(props) {
+	return (
+		<GameModeProvider>
+			<AppContainer>
+			</AppContainer>
+		</GameModeProvider>
 	);
 }
 

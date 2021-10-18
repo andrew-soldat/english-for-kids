@@ -1,7 +1,4 @@
 const store = {
-	// "main": {
-		// name: 'Main'
-	// },
 	"set1": {
 		name: 'Action (set A)',
 		imgSrc: './assets/img/jump.jpg',
@@ -267,7 +264,7 @@ const store = {
 			},
 			{
 			  word: 'shoe',
-			  translation: 'туфли',
+			  translation: 'туфля',
 			  imgSrc: 'assets/img/shoe.jpg',
 			  audioSrc: 'assets/audio/shoe.mp3'
 			}
@@ -393,7 +390,7 @@ const store = {
 			},
 			{
 			  word: 'lemon',
-			  translation: 'лемон',
+			  translation: 'лимон',
 			  imgSrc: 'assets/img/lemon.jpg',
 			  audioSrc: 'assets/audio/lemon.mp3'
 			},
@@ -438,4 +435,3 @@ const store = {
 }
 
 export default store;
-window.store = store;

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import CardCategory from './CardCategory'
+import CategoryCards from './CategoryCards'
+import { useMode } from '../../GameModeContext'
 import correctMP3 from './../../assets/audio/correct.mp3'
 import wrongMP3 from './../../assets/audio/wrong.mp3'
 import failureMP3 from './../../assets/audio/failure.mp3'
 import successMP3 from './../../assets/audio/success.mp3'
 import successImg from './../../assets/img/success.jpg'
 import failureImg from './../../assets/img/failure.jpg'
-// import cn from 'classnames'
 
 
-const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
+
+const CategoryCardsContainer = ({ nameCategory, children}) => {
+	const gameMode = useMode();
 	const [isStartGame, setIsStartGame] = useState(false);
 	const [isResultGame, setIsResultGame] = useState(false);
 	const [isNumberMistakes, setIsNumberMistakes] = useState(0);
@@ -100,12 +102,12 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 			<div className="category-title">
 				<h1 className="category-title__text">{nameCategory}</h1>
 			</div>
-			{modeGame &&
+			{gameMode.isGameMode &&
 				<div className="wrapper-stars"></div>
 			}
 			<div className="cards">
 				{Object.values(children).map((child) => {
-					if (modeGame) return (
+					if (gameMode.isGameMode) return (
 						<div key={child.word} className={'card-item ' + (isStartGame ? '' : '_game')}>
 							<div className="card-item__front">
 								<img className="card-item__image" src={child.imgSrc} data-word={child.word} alt={child.word}/>
@@ -113,12 +115,12 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
 						</div>
 					)
 					return (
-						<CardCategory key={child.word} child={child} />
+						<CategoryCards key={child.word} child={child} />
 					)
 				}
 				)}
 			</div>
-			{modeGame &&
+			{gameMode.isGameMode &&
 				<div className="play">
 					{isStartGame ?
 						<button className="play__repeat">Repeat</button> :
@@ -130,4 +132,4 @@ const CardsCategoryContainer = ({modeGame, nameCategory, children}) => {
    );
 };
 
-export default CardsCategoryContainer;
+export default CategoryCardsContainer;

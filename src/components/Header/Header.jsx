@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import LinkCardCategory from './LinkCardCategory'
 import { NavLink } from 'react-router-dom';
-// import { useMode } from './../../ModePlayContext';
+import store from '../../store'
+import { useMode } from './../../GameModeContext';
 
-const Header = ( {toggleMode, store} ) => {
-	// const modePlay = useMode();
-	
+const Header = () => {
+	const modePlay = useMode();
 	let [isActive, setActive] = useState(false);
 	
 	const handleToggleNoActive = () => {
@@ -15,27 +15,22 @@ const Header = ( {toggleMode, store} ) => {
 
 	const handleToggle = () => {
 		setActive(!isActive);
+		document.body.classList.toggle("_lock")
+	}
 
-		if (!isActive) {
-			document.body.classList.add("_lock");
-		} else {
-			document.body.classList.remove("_lock");
-		}
-	};
-
-	document.addEventListener("click", function (e) {
-		if (!e.target.closest('.header__list li, .header__burger')) {
-			setActive(false);
-			document.body.classList.remove("_lock");
-		}
-	})
+	// document.addEventListener("click", function (e) {
+	// 	if (!e.target.closest('.header__list li, .header__burger')) {
+	// 		setActive(false);
+	// 		document.body.classList.remove("_lock");
+	// 	}
+	// })
 	
    return (
       <header className="header">
 			<div className="header__toggle toggle">
 				<span className="toggle__text">Train</span>
 				<label className="toggle__switch switch">
-					<input className="switch__input" type="checkbox" onClick={toggleMode} />
+					<input className="switch__input" type="checkbox" onClick={modePlay.toggleMode} />
 					<span className="switch__slider"></span>
 				</label>
 				<span className="toggle__text">Game</span>

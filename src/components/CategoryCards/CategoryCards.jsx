@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CardCategory = ({child}) => {
+const CategoryCards = ({child}) => {
 	const [isActive, setActive] = useState(false);
 
 	const addClass = () => {
@@ -26,4 +26,4 @@ const CardCategory = ({child}) => {
 		</div>
 	)
 };
-export default CardCategory;
+export default CategoryCards;

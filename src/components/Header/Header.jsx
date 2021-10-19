@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-import LinkCardCategory from './LinkCardCategory'
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import store from '../../store'
-import { useMode } from './../../GameModeContext';
+import { useMode } from '../../PlayModeContext'
+
+const NavLinkCategory = ({nameCard, handleToggleNoActive}) => {	
+   return (
+      <li>
+			<NavLink to={`/${nameCard.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} className="header__link" onClick={handleToggleNoActive}>{nameCard}</NavLink>
+		</li>
+   );
+};
 
 const Header = () => {
-	const modePlay = useMode();
+	const playMode = useMode();
 	let [isActive, setActive] = useState(false);
 	
 	const handleToggleNoActive = () => {
@@ -17,23 +24,16 @@ const Header = () => {
 		setActive(!isActive);
 		document.body.classList.toggle("_lock")
 	}
-
-	// document.addEventListener("click", function (e) {
-	// 	if (!e.target.closest('.header__list li, .header__burger')) {
-	// 		setActive(false);
-	// 		document.body.classList.remove("_lock");
-	// 	}
-	// })
 	
    return (
       <header className="header">
 			<div className="header__toggle toggle">
 				<span className="toggle__text">Train</span>
 				<label className="toggle__switch switch">
-					<input className="switch__input" type="checkbox" onClick={modePlay.toggleMode} />
+					<input className="switch__input" type="checkbox" onClick={playMode.toggleMode} />
 					<span className="switch__slider"></span>
 				</label>
-				<span className="toggle__text">Game</span>
+				<span className="toggle__text">Play</span>
 			</div>
 			<div className="header__menu">
 				<div className={`header__burger ${isActive ? '_active' : ''}`} onClick={ handleToggle }>
@@ -42,14 +42,14 @@ const Header = () => {
 					<span></span>
 				</div>
 				<nav className={`header__nav ${isActive ? '_active' : null}`}>
-					<ul className="header__list">
+					<ul className="header__list"  onClick={handleToggleNoActive}>
 						<li>
-							<NavLink exact to="/" className="header__link" onClick={handleToggleNoActive}>Main</NavLink>
+							<NavLink exact to="/" className="header__link">Main</NavLink>
 						</li>
-						{Object.values(store).map((card) => <LinkCardCategory key={card.name} nameCard={card.name} handleToggleNoActive={handleToggleNoActive} />) }
+						{Object.values(store).map((card) => <NavLinkCategory key={card.name} nameCard={card.name} />) }
 					</ul>
 				</nav>
-				<div className="header__overlay"></div>
+				<div className="header__overlay" onClick={handleToggleNoActive}></div>
 			</div>
 		</header>
    );

@@ -5,15 +5,15 @@ import MainPage from './components/MainPage/MainPage'
 import CategoryCardsContainer from './components/CategoryCards/CategoryCardsContainer'
 import Footer from './components/Footer'
 import { HashRouter, Switch, Route } from 'react-router-dom'
-import { GameModeProvider, useMode } from './GameModeContext'
+import { PlayModeProvider, useMode } from './PlayModeContext'
 import store from './store'
 
 function AppContainer(props) {
-	const gameMode = useMode();
+	const playMode = useMode();
 
 	return (
 		<HashRouter>
-			<div className={`wrapper ${gameMode.isGameMode ? '_mode-play' : ''}`}>
+			<div className={`wrapper ${playMode.isPlayMode ? '_play-mode' : ''}`}>
 				<Header />
 				<Switch>
 					<Route exact path="/" render={() => <MainPage />}/>
@@ -28,10 +28,10 @@ function AppContainer(props) {
 
 function App(props) {
 	return (
-		<GameModeProvider>
+		<PlayModeProvider>
 			<AppContainer>
 			</AppContainer>
-		</GameModeProvider>
+		</PlayModeProvider>
 	);
 }
 

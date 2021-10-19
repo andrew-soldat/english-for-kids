@@ -1,8 +1,8 @@
-%mode-train {
+%train-mode {
 	background: #22c1c3;
 	background: linear-gradient(45deg, #22c1c3 0%, #fdbb2d 100%);
 }
-%mode-play {
+%play-mode {
 	background: #de3802;
 	background: linear-gradient(45deg, #de3802 0%, #00d4ff 100%);
 }
@@ -19,7 +19,7 @@ $color-play: #00d4ff;
 	flex-direction: column;
 	min-height: 100%;
 
-	&._mode-play {
+	&._play-mode {
 
 		.toggle__text:first-child {
 			color: #888;
@@ -39,18 +39,18 @@ $color-play: #00d4ff;
 		}
 
 		.header__burger span {
-			@extend %mode-play;
+			@extend %play-mode;
 		}
 		.header__burger._active span {
 			background: red;
 		}
 
 		.header__nav {
-			@extend %mode-play;
+			@extend %play-mode;
 		}
 
 		.card-category {
-			@extend %mode-play;
+			@extend %play-mode;
 		}
 
 		.card-item {
@@ -67,16 +67,27 @@ $color-play: #00d4ff;
 			&__front {
 				box-shadow: 0 1px 4px $color-play;
 
-				&.hide {
-					box-shadow: none;
-
+				@media (hover: hover) {
 					&:hover {
-						box-shadow: none;
+						box-shadow: 0 12px 14px $color-play;
 					}
 				}
 
-				&:hover {
-					box-shadow: 0 12px 14px $color-play;
+				&.hide {
+					box-shadow: none;
+					
+					&:hover {
+						box-shadow: none;
+					}
+					
+					.card-item__image {
+						filter: blur(3px);
+						transform: scale(0.8);
+		
+						&:hover {
+							cursor: unset;
+						}
+					}
 				}
 			}
 
@@ -117,7 +128,7 @@ $color-play: #00d4ff;
 			position: absolute;
 			width: 100%;
 			height: 4px;
-			@extend %mode-train;
+			@extend %train-mode;
 			border-radius: 50px;
 			transition: all 0.3s ease 0s;
 
@@ -129,6 +140,7 @@ $color-play: #00d4ff;
 				bottom: 0px;
 			}
 		}
+		
 		&._active {
 			span {
 				transform: scale(0);
@@ -151,7 +163,7 @@ $color-play: #00d4ff;
 		padding: 100px 0 0 0;
 		width: 320px;
 		height: 100%;
-		@extend %mode-train;
+		@extend %train-mode;
 		position: fixed;
 		top: 0;
 		right: -120%;
@@ -233,7 +245,7 @@ $color-play: #00d4ff;
 		height: 0;
 
 		&:checked + .switch__slider {
-			@extend %mode-play;
+			@extend %play-mode;
 		}
 
 		&:not(:checked):active + .switch__slider::before {
@@ -256,7 +268,7 @@ $color-play: #00d4ff;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		@extend %mode-train;
+		@extend %train-mode;
 		border-radius: 1rem;
 		transition: background 0.2s;
 
@@ -315,10 +327,12 @@ $color-play: #00d4ff;
 	cursor: pointer;
 	overflow: hidden;
 	transition: all 0.3s ease 0s;
-	@extend %mode-train;
+	@extend %train-mode;
 
-	&:hover {
-		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	@media (hover: hover) {
+		&:hover {
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
 	}
 
 	&__image {
@@ -402,27 +416,13 @@ $color-play: #00d4ff;
 		overflow: hidden;
 		backface-visibility: hidden;
 		box-shadow: 0 1px 4px $color-train;
+	}
 
-		&:hover {
-			box-shadow: 0 11px 14px $color-train;
-		}
-			
-		&.hide {
-			box-shadow: none;
-			
+	&__front {
+		@media (hover: hover) {
 			&:hover {
-				box-shadow: none;
+				box-shadow: 0 11px 14px $color-train;
 			}
-			
-			.card-item__image {
-				filter: blur(3px);
-				transform: scale(0.8);
-
-				&:hover {
-					cursor: unset;
-				}
-			}
-
 		}
 	}
 
@@ -492,7 +492,7 @@ $color-play: #00d4ff;
 		display: inline-block;
 		margin-top: 40px;
 		padding: 10px 20px;
-		@extend %mode-play;
+		@extend %play-mode;
 		color: #000;
 		font-size: 25px;
 		border-radius: 5px;

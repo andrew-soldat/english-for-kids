@@ -73,9 +73,14 @@ $color-play: #00d4ff;
 					}
 				}
 
+				&.active {
+					pointer-events: none;
+				}
+
 				&.hide {
 					box-shadow: none;
-					
+					pointer-events: none;
+									
 					&:hover {
 						box-shadow: none;
 					}
@@ -83,10 +88,6 @@ $color-play: #00d4ff;
 					.card-item__image {
 						filter: blur(3px);
 						transform: scale(0.8);
-		
-						&:hover {
-							cursor: unset;
-						}
 					}
 				}
 			}
@@ -103,10 +104,8 @@ $color-play: #00d4ff;
 }
 .page {
 	flex: 1 1 auto;
-
-	&._result {
-		display: flex;
-	}
+	display: flex;
+	flex-direction: column;
 }
 .header {
 	padding: 30px 0px 60px 0px;
@@ -166,13 +165,14 @@ $color-play: #00d4ff;
 		@extend %train-mode;
 		position: fixed;
 		top: 0;
-		right: -120%;
+		right: 0;
 		overflow: auto;
+		transform: translateX(120%);
 		transition: all 0.5s ease 0s;
 		z-index: 3;
 
 		&._active {
-			right: 0;
+			transform: translateX(0%);
 
 			~.header__overlay {
 				position: fixed;
@@ -181,7 +181,7 @@ $color-play: #00d4ff;
 				width: 100%;
 				height: 100%;
 				background-color: rgba(0, 0, 0, 0.164);
-				transition: all 0.3s ease 0s;
+				transition: all 0.5s ease 0s;
 				z-index: 2;
 			}
 			
@@ -428,6 +428,10 @@ $color-play: #00d4ff;
 
 	&__back {
 		transform: rotateY(180deg);
+
+		.card-item__image {
+			cursor: unset;
+		}
 	}
 	
 	&__image {
@@ -510,12 +514,8 @@ $color-play: #00d4ff;
 	}
 }
 .result {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	margin: auto;
+	text-align: center;
 
 	img {
 		max-width: 100%;
@@ -539,14 +539,51 @@ $color-play: #00d4ff;
 .footer {
 	margin: 60px 0px 30px 0px;
 	text-align: center;
+	font-size: 16px;
+	color: #000;
 
 	&__author {
-		font-size: 14px;
-		color: #000;
+		margin: 0px 0px 10px 0px;
+
+		&_icon {
+			display: inline-block;
+			margin: 0px 5px 0px 0px;
+			max-width: 15px;
+		}
 
 		&_link {
 			color: inherit;
 			text-decoration: underline;
+		}
+	}
+}
+.error {
+	margin: auto;
+	padding: 30px;
+	text-align: center;
+
+	&__img {
+		max-width: 400px;
+	}
+
+	&__title {
+		margin: 30px 0px 30px 0px;
+		font-size: 25px;
+		color: #5e5d5d;
+	}
+
+	&__back {
+		padding: 10px 15px;
+		font-size: 18px;
+		color: #ffffff;
+		background-color: #fdbb2d;
+		border-radius: 1rem;
+		transition: all 0.3s ease 0s;
+
+		&:hover {
+			color: #ffffff;
+			background-color: #00d4ff;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
 	}
 }

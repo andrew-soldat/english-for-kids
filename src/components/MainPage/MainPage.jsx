@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import store from './../../store'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 
 const CardCategory = ({nameCategory, imgCategory}) => {

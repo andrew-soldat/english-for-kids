@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "English For Kids",
+  "name": "English For Kids",
+  "description": "Application for learning English words with kids.",
   "icons": [
     {
       "src": "favicon.ico",

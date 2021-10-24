@@ -1,14 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react'
 
-const PlayModeContext = React.createContext();
+const PlayModeContext = React.createContext()
 
 export const useMode = () => {
-	return useContext(PlayModeContext);
+	return useContext(PlayModeContext)
 }
 
 export const PlayModeProvider = ({ children }) => {
-	let [playMode, setPlayMode] = useState(false);
-	const toggleMode = () => setPlayMode(!playMode);
+	let [playMode, setPlayMode] = useState(false)
+	const toggleMode = () => setPlayMode(!playMode)
 
 	return (
 		<PlayModeContext.Provider value={{

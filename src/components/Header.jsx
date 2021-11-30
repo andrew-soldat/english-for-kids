@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import store from '../../store'
-import { useMode } from '../../PlayModeContext'
+import store from '../store'
+import { useMode } from '../PlayModeContext'
 
 const NavLinkCategory = ({nameCard, handleToggle}) => {	
    return (
@@ -36,18 +36,14 @@ const Header = () => {
          </div>
          <div className="header__menu">
             <div
-               className={
-                  isActive ? ' header__burger _active' : 'header__burger'
-               }
+               className={isActive ? ' header__burger _active' : 'header__burger'}
                onClick={handleToggle}
             >
                <span></span>
                <span></span>
                <span></span>
             </div>
-            <nav
-               className={isActive ? 'header__nav _active' : 'header__nav'}
-            >
+            <nav className={isActive ? 'header__nav _active' : 'header__nav'}>
                <ul className="header__list">
                   <li>
                      <NavLink

@@ -1,9 +1,9 @@
 import './App.scss'
 import React from 'react'
-import Header from './components/Header/Header'
-import MainPage from './components/MainPage/MainPage'
-import Error404 from './components/Error/Error404';
-import CategoryCardsContainer from './components/CategoryCards/CategoryCardsContainer'
+import Header from './components/Header'
+import MainPage from './components/pages/MainPage'
+import Error404 from './components/pages/Error404';
+import CategoryCards from './components/pages/CategoryCards'
 import Footer from './components/Footer'
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { PlayModeProvider, useMode } from './PlayModeContext'
@@ -29,7 +29,7 @@ function AppContainer(props) {
                            .toLowerCase()
                            .replace(/[^a-zA-Z0-9]/g, '')}`}
                      >
-                        <CategoryCardsContainer
+                        <CategoryCards
                            nameCategory={card.name}
                            children={card.children}
                         />

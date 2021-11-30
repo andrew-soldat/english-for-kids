@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import CategoryCards from './CategoryCards'
+import ItemCategoryCards from '../ItemCategoryCards'
 import { useMode } from '../../PlayModeContext'
 import correctMP3 from './../../assets/audio/correct.mp3'
 import wrongMP3 from './../../assets/audio/wrong.mp3'
@@ -7,27 +7,15 @@ import failureMP3 from './../../assets/audio/failure.mp3'
 import successMP3 from './../../assets/audio/success.mp3'
 import successImg from './../../assets/img/success.jpg'
 import failureImg from './../../assets/img/failure.jpg'
+import shuffleArray from '../utils/shuffleArray'
+import playAudio from '../utils/playAudio'
 
-const CategoryCardsContainer = ({ nameCategory, children}) => {
+const CategoryCards = ({ nameCategory, children}) => {
 	const playMode = useMode();
 	const [isStartGame, setIsStartGame] = useState(false)
 	const [isResultGame, setIsResultGame] = useState(false)
 	const [numberMistakes, setNumberMistakes] = useState(0)
-
-	const shuffleArray = (array) => {
-		for (let i = array.length - 1; i > 0; i -= 1) {
-		  const j = Math.floor(Math.random() * (i + 1));
-		  [array[i], array[j]] = [array[j], array[i]];
-		}
-		return array
-	}
-
-	const playAudio = (sound) => {
-		new Audio(sound).play()
-	}
-	
-	let countMistakes = 0
-	const wrapperStars = document.querySelector('.wrapper-stars')
+	const [arrayStars, setArrayStars] = useState([])
 
 	const newArraySounds = useMemo(() => {
       const arraySounds = [];
@@ -41,7 +29,11 @@ const CategoryCardsContainer = ({ nameCategory, children}) => {
 	}
 	
 	function playBackSoundCard() {
-		newArraySounds.length ? setTimeout(() => playAudio(newArraySounds[newArraySounds.length - 1]), 1000) : setTimeout(() => finishGame(), 2000)
+		newArraySounds.length
+			?
+			setTimeout(() => playAudio(newArraySounds[newArraySounds.length - 1]), 1000)
+			:
+			setTimeout(() => finishGame(), 2000)
 	}
 
 	function deleteOneCardFromArray() {
@@ -49,31 +41,27 @@ const CategoryCardsContainer = ({ nameCategory, children}) => {
 	}
 
 	function getSelectCard(e) {
-      if (
-         `assets/audio/${e.target.getAttribute('data-word')}.mp3` ===
-         newArraySounds[newArraySounds.length - 1]
-      ) {
+      if (`assets/audio/${e.target.getAttribute('data-word')}.mp3` === newArraySounds[newArraySounds.length - 1]) {
          e.target.parentNode.classList.add('hide')
-			
-         wrapperStars.innerHTML += `<img src="assets/img/star-win.svg" alt="correct" />`
+			setArrayStars([...arrayStars, 'star-win'])
          playAudio(correctMP3)
          deleteOneCardFromArray()
          playBackSoundCard()
       } else {
-         countMistakes++;
-         wrapperStars.innerHTML += `<img src="assets/img/star.svg" alt="wrong" />`;
+			setNumberMistakes(numberMistakes + 1)
+			setArrayStars([...arrayStars, 'star'])
          playAudio(wrongMP3);
       }
    };
 
 	const finishGame = () => {
-		playAudio(countMistakes ? failureMP3 : successMP3)
-		setNumberMistakes(countMistakes)
+		playAudio(numberMistakes ? failureMP3 : successMP3)
 		setIsResultGame(true)
-
 		setTimeout(() => {
 			setIsResultGame(false)
 			setIsStartGame(false)
+			setNumberMistakes(0)
+			setArrayStars([])
 		}, 4000)
 	}
 	
@@ -81,7 +69,7 @@ const CategoryCardsContainer = ({ nameCategory, children}) => {
 		return <div className="result">
 					<img src={numberMistakes ? failureImg : successImg} alt={numberMistakes ? failureImg : successImg} />
 					<div className="result__text">
-						{numberMistakes ? <span>{numberMistakes} mistake{numberMistakes > 1 ? 's' : ''}.</span> : 'Congratulations!'}
+						{numberMistakes ? <span>{numberMistakes} {numberMistakes > 1 ? 'mistakes' : 'mistake'}.</span> : 'Congratulations!'}
 					</div>
 				</div>
 	}
@@ -90,7 +78,7 @@ const CategoryCardsContainer = ({ nameCategory, children}) => {
          <div className="category-title">
             <h1 className="category-title__text">{nameCategory}</h1>
          </div>
-         <div className="wrapper-stars"></div>
+         <div className="wrapper-stars">{arrayStars.length !== 0 && arrayStars.map((item, index) => <img key={index} src={`assets/img/${item}.svg`} alt="wrong" />)}</div>
          <div className="cards">
             {Object.values(children).map((child) => {
                if (playMode.isPlayMode)
@@ -110,7 +98,7 @@ const CategoryCardsContainer = ({ nameCategory, children}) => {
                         </div>
                      </div>
                   );
-               return <CategoryCards key={child.word} child={child} />;
+               return <ItemCategoryCards key={child.word} child={child} />;
             })}
          </div>
          {playMode.isPlayMode && (
@@ -135,4 +123,4 @@ const CategoryCardsContainer = ({ nameCategory, children}) => {
    );
 };
 
-export default CategoryCardsContainer;
+export default CategoryCards;

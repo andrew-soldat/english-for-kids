@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import playAudio from './utils/playAudio';
 
-const CategoryCards = ({child}) => {
+const ItemCategoryCards = ({child}) => {
 	const [isActive, setActive] = useState(false)
 
 	const addClass = () => {
@@ -11,15 +12,13 @@ const CategoryCards = ({child}) => {
 	}
 
 	return (
-      <div
-         className={isActive ? 'card-item _active' : 'card-item'}
-      >
+      <div className={isActive ? 'card-item _active' : 'card-item'}>
          <div className="card-item__front">
             <img
                className="card-item__image"
                src={child.imgSrc}
                alt={child.word}
-               onClick={() => new Audio(child.audioSrc).play()}
+               onClick={() => playAudio(child.audioSrc)}
             />
             <div className="card-item__content">
                <div className="card-item__text">{child.word}</div>
@@ -40,4 +39,4 @@ const CategoryCards = ({child}) => {
       </div>
    );
 };
-export default CategoryCards;
+export default ItemCategoryCards;

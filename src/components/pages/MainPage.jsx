@@ -1,11 +1,11 @@
 import React from 'react'
-import store from './../../store'
+import store from '../../store'
 import { NavLink } from 'react-router-dom'
 
 
 const CardCategory = ({nameCategory, imgCategory}) => {
    return (
-      <NavLink key={nameCategory} to={`/${nameCategory.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} className="card-category">
+      <NavLink to={`/${nameCategory.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} className="card-category">
          <img className="card-category__image" src={imgCategory} alt={nameCategory} />
 			<div className="card-category__text">{nameCategory}</div>
       </NavLink>

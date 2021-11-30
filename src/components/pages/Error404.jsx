@@ -1,8 +1,7 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Error404 = () => {
-	
    return (
       <div className="error">
          <img className="error__img" src="assets/img/404.png" alt="404" />
@@ -13,4 +12,4 @@ const Error404 = () => {
       </div>
    );
 };
-export default Error404
+export default Error404;

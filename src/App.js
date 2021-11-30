@@ -1,18 +1,18 @@
-import './App.scss'
-import React from 'react'
-import Header from './components/Header'
-import MainPage from './components/pages/MainPage'
+import './App.scss';
+import React from 'react';
+import Header from './components/Header';
+import MainPage from './components/pages/MainPage';
 import Error404 from './components/pages/Error404';
-import CategoryCards from './components/pages/CategoryCards'
-import Footer from './components/Footer'
+import CategoryCards from './components/pages/CategoryCards';
+import Footer from './components/Footer';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { PlayModeProvider, useMode } from './PlayModeContext'
-import store from './store'
+import { PlayModeProvider, useMode } from './PlayModeContext';
+import store from './store';
 
 function AppContainer(props) {
-	const playMode = useMode()
+   const playMode = useMode();
 
-	return (
+   return (
       <HashRouter>
          <div className={`wrapper ${playMode.isPlayMode ? '_play-mode' : ''}`}>
             <Header />
@@ -48,12 +48,11 @@ function AppContainer(props) {
 }
 
 function App(props) {
-	return (
-		<PlayModeProvider>
-			<AppContainer>
-			</AppContainer>
-		</PlayModeProvider>
-	);
+   return (
+      <PlayModeProvider>
+         <AppContainer></AppContainer>
+      </PlayModeProvider>
+   );
 }
 
 export default App;

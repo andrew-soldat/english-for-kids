@@ -1,25 +1,31 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import store from '../store'
-import { useMode } from '../PlayModeContext'
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import store from '../store';
+import { useMode } from '../PlayModeContext';
 
-const NavLinkCategory = ({nameCard, handleToggle}) => {	
+const NavLinkCategory = ({ nameCard, handleToggle }) => {
    return (
       <li>
-			<NavLink to={`/${nameCard.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`} className="header__link" onClick={handleToggle}>{nameCard}</NavLink>
-		</li>
+         <NavLink
+            to={`/${nameCard.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')}`}
+            className="header__link"
+            onClick={handleToggle}
+         >
+            {nameCard}
+         </NavLink>
+      </li>
    );
 };
 
 const Header = () => {
-	const playMode = useMode()
-	let [isActive, setActive] = useState(false)
+   const playMode = useMode();
+   let [isActive, setActive] = useState(false);
 
-	const handleToggle = () => {
-		setActive(!isActive)
-		document.body.classList.toggle("_lock")
-	}
-	
+   const handleToggle = () => {
+      setActive(!isActive);
+      document.body.classList.toggle('_lock');
+   };
+
    return (
       <header className="header">
          <div className="header__toggle toggle">
@@ -36,7 +42,9 @@ const Header = () => {
          </div>
          <div className="header__menu">
             <div
-               className={isActive ? ' header__burger _active' : 'header__burger'}
+               className={
+                  isActive ? ' header__burger _active' : 'header__burger'
+               }
                onClick={handleToggle}
             >
                <span></span>

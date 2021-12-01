@@ -16,6 +16,7 @@ const CategoryCards = ({ nameCategory, children }) => {
    const [isResultGame, setIsResultGame] = useState(false);
    const [numberMistakes, setNumberMistakes] = useState(0);
    const [arrayStars, setArrayStars] = useState([]);
+   const [arrayCorrectAnswer, setArrayCorrectAnswer] = useState([]);
 
    const newArraySounds = useMemo(() => {
       const arraySounds = [];
@@ -41,12 +42,11 @@ const CategoryCards = ({ nameCategory, children }) => {
       newArraySounds.pop();
    }
 
-   function getSelectCard(e) {
+   function getSelectCard(id) {
       if (
-         `assets/audio/${e.target.getAttribute('data-word')}.mp3` ===
-         newArraySounds[newArraySounds.length - 1]
+         `assets/audio/${id}.mp3` === newArraySounds[newArraySounds.length - 1]
       ) {
-         e.target.parentNode.classList.add('hide');
+         setArrayCorrectAnswer([...arrayCorrectAnswer, id]);
          setArrayStars([...arrayStars, 'star-win']);
          playAudio(correctMP3);
          deleteOneCardFromArray();
@@ -66,6 +66,7 @@ const CategoryCards = ({ nameCategory, children }) => {
          setIsStartGame(false);
          setNumberMistakes(0);
          setArrayStars([]);
+         setArrayCorrectAnswer([]);
       }, 4000);
    };
 
@@ -112,13 +113,13 @@ const CategoryCards = ({ nameCategory, children }) => {
                      >
                         <div
                            className={
-                              isStartGame
-                                 ? 'card-item__front'
-                                 : 'card-item__front active'
+                              arrayCorrectAnswer.some((id) => id === child.word)
+                                 ? 'card-item__front hide'
+                                 : 'card-item__front'
                            }
                         >
                            <img
-                              onClick={getSelectCard}
+                              onClick={() => getSelectCard(child.word)}
                               className="card-item__image"
                               src={child.imgSrc}
                               data-word={child.word}

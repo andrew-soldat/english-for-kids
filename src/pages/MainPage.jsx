@@ -1,5 +1,5 @@
 import React from 'react';
-import store from '../../store';
+import store from '../store';
 import { NavLink } from 'react-router-dom';
 
 const CardCategory = ({ nameCategory, imgCategory }) => {

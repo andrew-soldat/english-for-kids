@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from 'react';
-import ItemCategoryCards from '../ItemCategoryCards';
-import { useMode } from '../../PlayModeContext';
-import correctMP3 from './../../assets/audio/correct.mp3';
-import wrongMP3 from './../../assets/audio/wrong.mp3';
-import failureMP3 from './../../assets/audio/failure.mp3';
-import successMP3 from './../../assets/audio/success.mp3';
-import successImg from './../../assets/img/success.jpg';
-import failureImg from './../../assets/img/failure.jpg';
-import shuffleArray from '../../utils/shuffleArray';
-import playAudio from '../../utils/playAudio';
+import ItemCategoryCards from '../components/ItemCategoryCards';
+import { useMode } from '../PlayModeContext';
+import correctMP3 from '../assets/audio/correct.mp3';
+import wrongMP3 from '../assets/audio/wrong.mp3';
+import failureMP3 from '../assets/audio/failure.mp3';
+import successMP3 from '../assets/audio/success.mp3';
+import successImg from '../assets/img/success.jpg';
+import failureImg from '../assets/img/failure.jpg';
+import shuffleArray from '../utils/shuffleArray';
+import playAudio from '../utils/playAudio';
 
 const CategoryCards = ({ nameCategory, children }) => {
    const playMode = useMode();
@@ -43,19 +43,21 @@ const CategoryCards = ({ nameCategory, children }) => {
    }
 
    function getSelectCard(id) {
-      if (
-         `assets/audio/${id}.mp3` === newArraySounds[newArraySounds.length - 1]
-      ) {
-         setArrayCorrectAnswer([...arrayCorrectAnswer, id]);
-         setArrayStars([...arrayStars, 'star-win']);
-         playAudio(correctMP3);
-         deleteOneCardFromArray();
-         playBackSoundCard();
-      } else {
-         setNumberMistakes(numberMistakes + 1);
-         setArrayStars([...arrayStars, 'star']);
-         playAudio(wrongMP3);
-      }
+		if (isStartGame) {
+			if (
+				`assets/audio/${id}.mp3` === newArraySounds[newArraySounds.length - 1]
+			) {
+				setArrayCorrectAnswer([...arrayCorrectAnswer, id]);
+				setArrayStars([...arrayStars, 'star-win']);
+				playAudio(correctMP3);
+				deleteOneCardFromArray();
+				playBackSoundCard();
+			} else {
+				setNumberMistakes(numberMistakes + 1);
+				setArrayStars([...arrayStars, 'star']);
+				playAudio(wrongMP3);
+			}
+		}
    }
 
    const finishGame = () => {
@@ -75,7 +77,7 @@ const CategoryCards = ({ nameCategory, children }) => {
          <div className="result">
             <img
                src={numberMistakes ? failureImg : successImg}
-               alt={numberMistakes ? failureImg : successImg}
+               alt={numberMistakes ? 'failure' : 'success'}
             />
             <div className="result__text">
                {numberMistakes ? (
@@ -119,10 +121,9 @@ const CategoryCards = ({ nameCategory, children }) => {
                            }
                         >
                            <img
-                              onClick={() => getSelectCard(child.word)}
+										onClick={() => getSelectCard(child.word)}
                               className="card-item__image"
                               src={child.imgSrc}
-                              data-word={child.word}
                               alt={child.word}
                            />
                         </div>

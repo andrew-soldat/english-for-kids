@@ -1,9 +1,9 @@
 import './App.scss';
 import React from 'react';
 import Header from './components/Header';
-import MainPage from './components/pages/MainPage';
-import Error404 from './components/pages/Error404';
-import CategoryCards from './components/pages/CategoryCards';
+import MainPage from './pages/MainPage';
+import Error404 from './pages/Error404';
+import CategoryCards from './pages/CategoryCards';
 import Footer from './components/Footer';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { PlayModeProvider, useMode } from './PlayModeContext';

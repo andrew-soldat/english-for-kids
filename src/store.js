@@ -431,6 +431,84 @@ const store = {
          },
       ],
    },
+   kitchen1: {
+      name: 'In the kitchen',
+      imgSrc: './assets/img/spoon.jpg',
+      children: [
+         {
+            word: 'knife',
+            translation: 'нож',
+            imgSrc: 'assets/img/knife.jpg',
+            audioSrc: 'assets/audio/knife.mp3',
+         },
+         {
+            word: 'чайник',
+            translation: 'teapot',
+            imgSrc: 'assets/img/teapot.jpg',
+            audioSrc: 'assets/audio/teapot.mp3',
+         },
+         {
+            word: 'stove',
+            translation: 'плита',
+            imgSrc: 'assets/img/stove.jpg',
+            audioSrc: 'assets/audio/stove.mp3',
+         },
+         {
+            word: 'cup',
+            translation: 'чашка',
+            imgSrc: 'assets/img/cup.jpg',
+            audioSrc: 'assets/audio/cup.mp3',
+         },
+         {
+            word: 'microwave',
+            translation: 'микроволновая печь',
+            imgSrc: 'assets/img/microwave.jpg',
+            audioSrc: 'assets/audio/microwave.mp3',
+         },
+         {
+            word: 'glass',
+            translation: 'стакан',
+            imgSrc: 'assets/img/glass.jpg',
+            audioSrc: 'assets/audio/glass.mp3',
+         },
+         {
+            word: 'lid',
+            translation: 'крышка',
+            imgSrc: 'assets/img/lid.jpg',
+            audioSrc: 'assets/audio/lid.mp3',
+         },
+         {
+            word: 'fork',
+            translation: 'вилка',
+            imgSrc: 'assets/img/fork.jpg',
+            audioSrc: 'assets/audio/fork.mp3',
+         },
+         {
+            word: 'frying pan',
+            translation: 'сковорода',
+            imgSrc: 'assets/img/frying_pan.jpg',
+            audioSrc: 'assets/audio/frying_pan.mp3',
+         },
+         {
+            word: 'spoon',
+            translation: 'ложка',
+            imgSrc: 'assets/img/spoon.jpg',
+            audioSrc: 'assets/audio/spoon.mp3',
+         },
+         {
+            word: 'coffee machine',
+            translation: 'кофемашина',
+            imgSrc: 'assets/img/coffee_machine.jpg',
+            audioSrc: 'assets/audio/coffee_machine.mp3',
+         },
+         {
+            word: 'pot',
+            translation: 'кастрюля',
+            imgSrc: 'assets/img/pot.jpg',
+            audioSrc: 'assets/audio/pot.mp3',
+         },
+      ],
+   },
 };
 
 export default store;

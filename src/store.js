@@ -442,8 +442,8 @@ const store = {
             audioSrc: 'assets/audio/knife.mp3',
          },
          {
-            word: 'чайник',
-            translation: 'teapot',
+            word: 'teapot',
+            translation: 'чайник',
             imgSrc: 'assets/img/teapot.jpg',
             audioSrc: 'assets/audio/teapot.mp3',
          },

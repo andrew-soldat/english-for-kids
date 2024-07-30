@@ -45,7 +45,7 @@ const CategoryCards = ({ nameCategory, children }) => {
    function getSelectCard(id) {
 		if (isStartGame) {
 			if (
-				`assets/audio/${id}.mp3` === newArraySounds[newArraySounds.length - 1]
+				`assets/audio/${id.replace(/ /g, '_')}.mp3` === newArraySounds[newArraySounds.length - 1]
 			) {
 				setArrayCorrectAnswer([...arrayCorrectAnswer, id]);
 				setArrayStars([...arrayStars, 'star-win']);
@@ -121,7 +121,7 @@ const CategoryCards = ({ nameCategory, children }) => {
                            }
                         >
                            <img
-										onClick={() => getSelectCard(child.word)}
+							  onClick={() => getSelectCard(child.word)}
                               className="card-item__image"
                               src={child.imgSrc}
                               alt={child.word}
